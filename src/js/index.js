@@ -81,9 +81,8 @@ const controlRecipe = async () => {
         const selectedRecipe = state.search.result.find(hit => hit.recipe.id == id).recipe
 
         // Create new recipe object
-        console.log('here', selectedRecipe)
-
         state.recipe = new Recipe(selectedRecipe);
+        
         try {
             // Get recipe data and parse ingredients
             await state.recipe.getRecipe();
