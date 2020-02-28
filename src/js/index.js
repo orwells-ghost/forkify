@@ -42,7 +42,8 @@ const controlSearch = async () => {
             clearLoader();
             searchView.renderResults(state.search.result);
         } catch (error) {
-            alert('Error rendering results.');
+            alert('Error rendering results.')
+            console.log(error)
             clearLoader();
         }
     }
@@ -76,9 +77,13 @@ const controlRecipe = async () => {
         // Highlight selected search item
         if (state.search) searchView.heightlightSelected(id);
 
-        // Create new recipe object
-        state.recipe = new Recipe(id);
+        // Find selected recipe in state
+        const selectedRecipe = state.search.result.find(hit => hit.recipe.id == id).recipe
 
+        // Create new recipe object
+        console.log('here', selectedRecipe)
+
+        state.recipe = new Recipe(selectedRecipe);
         try {
             // Get recipe data and parse ingredients
             await state.recipe.getRecipe();

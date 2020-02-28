@@ -1,19 +1,25 @@
 import axios from 'axios';
-import { key } from '../config';
+import { key, app_id } from '../config';
 
 export default class Recipe {
-    constructor(id) {
-        this.id = id;
+    constructor(data) {
+        this.id = data.id;
+        this.title = data.label
+        this.img = data.image
+        this.url = data.url
+        this.ingredients = data.ingredientLines
+        this.author = data.source
     }
 
     async getRecipe() {
         try {
-            const res = await axios(`https://www.food2fork.com/api/get?key=${key}&rId=${this.id}`);
-            this.title = res.data.recipe.title;
-            this.author = res.data.recipe.publisher;
-            this.img = res.data.recipe.image_url;
-            this.url = res.data.recipe.source_url;
-            this.ingredients = res.data.recipe.ingredients;
+            const res = await axios(`https://api.edamam.com/search?r=http%3A%2F%2Fwww.edamam.com%2Fontologies%2Fedamam.owl%${this.id}&app_id=${app_id}&app_key=${key}`);
+            console.log(res.data)
+            // this.title = res.data.recipe.title;
+            // this.author = res.data.recipe.publisher;
+            // this.img = res.data.recipe.image_url;
+            // this.url = res.data.recipe.source_url;
+            // this.ingredients = res.data.recipe.ingredients;
         } catch (error) {
             console.log(error);
             alert('Something went wrong :(');
@@ -103,3 +109,7 @@ export default class Recipe {
         this.servings = newServings;
     }
 }
+
+// `https://api.edamam.com/search?r=${this.id}&app_id=${app_id}&app_key=${key}`
+
+// http://www.edamam.com/ontologies/edamam.owl#recipe_1b6dfeaf0988f96b187c7c9bb69a14fa

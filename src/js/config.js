@@ -1,1 +1,2 @@
-export const key = '130a4b4a049be1326690230431c6b259';
+export const key = 'b5f8bee39ace5ce73675fae077b31e37'
+export const app_id = '3e9a32e5'
